@@ -920,13 +920,8 @@ document.addEventListener('DOMContentLoaded', onDOMContentLoaded);
 
 // Debug stuff
 
-window.addEventListener('keydown', function onKeyPress(e) {
-    if (e.which === 252) { // Space 252
-        onTap();
-
-    } else if (e.which === 16) { // Shift
-        spawnDuck1();
-    }
+window.addEventListener('click', function() {
+     onTap();
 });
 
 },{"./audio":6,"./network":8}],8:[function(require,module,exports){
