@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>VR Game - Miguel Bermeo</title>
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <script src="Scripts/firebase.3.4.1.js"></script>
+    <script src="Scripts/aframe.0.3.0.min.js"></script>
+    <script src="Scripts/aframe-material-overdraw-component.js"></script>
+    <script src="Scripts/aframe-bmfont-text-component.min.js"></script>
+    <script src="Scripts/socket.io.1.2.0.js"></script>
+    <script src="Scripts/RamdomObjects.js"></script>
+</head>
+<body>
+	<a-scene id="scene">
+
+	<a-assets>
+		<img id="background1" src="assets/Aldea.jpg">
+		<img id="background2" src="assets/Patos.png">
+
+        <a-mixin id="blueSky" material="color:rgb(72,161,241)"></a-mixin>
+        <a-mixin id="darkSky" material="color:rgb(9,20,30)"></a-mixin>
+
+    
+        <img id="duckAcrossLeft2" src="assets/RandomObj/Cubo1.png">
+        <img id="duckAcrossLeft3" src="assets/RandomObj/Cubo1.png">
+        <img id="duckAcrossRight1" src="assets/RandomObj/Cubo1.png">
+        <img id="duckAcrossRight2" src="assets/RandomObj/Cubo1.png">
+        <img id="duckAcrossRight3" src="assets/RandomObj/Cubo1.png">
+
+        <img id="duckUpLeft1" src="assets/RandomObj/Cubo1.png">
+        <img id="duckUpLeft2" src="assets/RandomObj/Cubo1.png">
+        <img id="duckUpLeft3" src="assets/RandomObj/Cubo1.png">
+        <img id="duckUpRight1" src="assets/RandomObj/Cubo1.png">
+        <img id="duckUpRight2" src="assets/RandomObj/Cubo1.png">
+        <img id="duckUpRight3" src="assets/RandomObj/Cubo1.png">
+
+        <img id="duckDown1" src="assets/RandomObj/Cubo1.png">
+        <img id="duckDown2" src="assets/RandomObj/Cubo1.png">
+
+        <img id="duckShot" src="assets/RandomObj/CubeExplosion.png">
+
+        <img id="background" src="assets/RandomObj/background.png">
+
+        <img id="dogSniff" src="assets/RandomObj/Common.png">
+        <img id="dogReady" src="assets/RandomObj/Common.png">
+
+        <img id="dogJump1" src="assets/RandomObj/Common.png">
+        <img id="dogJump2" src="assets/RandomObj/Common.png">
+
+        <img id="dogWalk1" src="assets/RandomObj/Common.png">
+        <img id="dogWalk2" src="assets/RandomObj/Common.png">
+        <img id="dogWalk3" src="assets/RandomObj/Common.png">
+        <img id="dogWalk4" src="assets/RandomObj/Common.png">
+
+        <img id="dogOneDuck" src="assets/RandomObj/Common.png">
+
+	</a-assets>
+
+    <a-sphere id="sightField" radius="24"
+              class="interactive"
+              material="opacity:0.6;side:back; visible:false">
+    </a-sphere>
+
+    <a-sphere radius="0.2" material="color:#ff0000" id="hitArea">
+        <a-plane id="hitBox" width="1" height="1"
+                 material="shader:flat; visible:false">
+        </a-plane>
+    </a-sphere>
+
+    <a-plane class="interactive duck" id="duck1" width="1.5" height="1.5"
+             material="shader:flat;side:double;transparent:true;src:#duckAcrossLeft1"
+             position="0 0 -12">
+    </a-plane>
+
+    <a-plane class="interactive duck" id="duck2" width="1.5" height="1.5"
+             material="shader:flat;side:double;transparent:true;src:#duckAcrossLeft1"
+             position="0 0 -12">
+    </a-plane>
+
+    <a-plane id="ground" width="16" height="16"
+             material="shader:flat; color:rgb(34,139,34)"
+             rotation="-90 0 0"
+             position="0 0 0">
+    </a-plane>
+
+    <a-camera wasd-controls="enabled:false" id="player">
+    <a-text id="score" value="Score" position="0 0.25 0.1" color="white" width="5" anchor="left"></a-text>
+        <a-cylinder id="zapper" material="shader:flat;color:rgb(119,1,1);flatShading:true"
+                    geometry="primitive:cylinder;radius:0.05;segmentsRadial:6;segmentsHeight:1;height:0.8"
+                    position="0 -0.3 -1"
+                    rotation="90 0 0">
+            <a-entity raycaster="interval: 10; objects: .interactive" scale="1 1 -1" rotation="90 0 0"></a-entity>
+            <a-box geometry="width:0.08;height:0.1;depth:0.3"
+			material="shader:flat;color:rgb(7,0,0);flatShading:true"
+            position="0 0.25 0.1" rotation="-30 0 0"></a-box>
+        </a-cylinder>
+    </a-camera>
+
+    <a-plane id="dogGotDucks" width="2.72" height="2.78"
+             material="shader:flat;side:double;transparent:true;src:#dogOneDuck"
+             position="0 0 -12">
+    </a-plane>
+
+    <a-cylinder id="bg2" width="16" height="8"
+                material-overdraw="overdraw:0.8"
+                material="shader:flat;side:double;transparent:true;src:#background2;depthTest:true;repeat:2 1;width:514.72;height:254.18;fog:false;roughness:1;flatShading:false;color:#664040;opacity:1"
+                position="0 4 0" scale="1 1 1"
+                geometry="primitive:cylinder;height:8;radius:8;segmentsRadial:8;segmentsHeight:1;openEnded:true">
+    </a-cylinder>
+
+    <a-plane width="2.5" height="2.76" id="dog"
+             material="depthTest:true;shader:flat;transparent:true;src:#dogWalk1"
+             position="-2 1.38 -7"
+    ></a-plane>
+
+    <a-sky id="sky" material="color:rgb(72,161,241)"></a-sky>
+
+	</a-scene>
+</body>
+</html>
